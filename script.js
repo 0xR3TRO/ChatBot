@@ -13,8 +13,9 @@ const createChatLi = (message, className) => {
     return chatLi;
 }
 
-const generateResponse = () =>{
+const generateResponse = (incomingChatLI) =>{
     const API_URL = "https://api.openai.com/v1/chat/completions";
+    const messageElement = incomingChatLI.querySelector("p");
 
     const requestOptions = {
         method: "POST",
@@ -27,6 +28,12 @@ const generateResponse = () =>{
             message: [{role: "user", content: userMessage}]
         })
     }
+
+    fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
+        messageElement.textContent = data.choices[0].message.content;
+    }).catch((error) =>{
+        messageElement.textContent = data.choices[0].message.content;
+    })
 }
 
 const handleChat = () => {
@@ -36,7 +43,9 @@ const handleChat = () => {
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
 
     setTimeout(() => {
-        chatbox.appendChild(createChatLi("Thinking...", "incoming"));
+        const incomingChatLI = createChatLi("Thinking...", "incoming")
+        chatbox.appendChild(incomingChatLI);
+        generateResponse(incomingChatLI);
     }, 600);
 }
 
