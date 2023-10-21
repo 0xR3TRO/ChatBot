@@ -1,3 +1,4 @@
+// Scripts and functions on this page are the creation of 0xR3TR0. All rights reserved.
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
@@ -64,7 +65,7 @@ chatInput.addEventListener("input", () => {
 });
 
 chatInput.addEventListener("keydown", (e) => {
-    IdleDeadline(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800){
+    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleChat();
     }
