@@ -32,8 +32,8 @@ const generateResponse = (incomingChatLI) =>{
     fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
         messageElement.textContent = data.choices[0].message.content;
     }).catch((error) =>{
-        messageElement.textContent = data.choices[0].message.content;
-    })
+        messageElement.textContent = "Oops! Something went wrong. Please try agan.";
+    }).finally(() => chatbox.scrollTo(0, chatbox.scrollHeight));
 }
 
 const handleChat = () => {
@@ -41,10 +41,12 @@ const handleChat = () => {
     if(!userMessage) return;
 
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    chatbox.scrollTo(0, chatbox.scrollHeight);
 
     setTimeout(() => {
         const incomingChatLI = createChatLi("Thinking...", "incoming")
         chatbox.appendChild(incomingChatLI);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
         generateResponse(incomingChatLI);
     }, 600);
 }
