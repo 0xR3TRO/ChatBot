@@ -1,4 +1,4 @@
-// Scripts and functions on this page are the creation of 0xR3TR0. All rights reserved.
+// Scripts and functions on this page are the creation of 0xR3TR0. All rights reserved. 
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
